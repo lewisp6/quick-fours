@@ -1,0 +1,34 @@
+@import "./base.css";
+
+:root {
+  /* colors */
+  --primary-color: #e2ffec;
+  --secondary-color: #e2f5ff;
+  --tertiary-color: #ffe2fa;
+  /* #fff3e2 */
+
+  /* desktop font sizes */
+  --h1-desktop-font-size: 4em;
+
+  /* mobile font sizes */
+  --h1-mobile-font-size: 3em;
+}
+
+body {
+  background-color: var(--primary-color);
+}
+
+#app {
+  max-width: auto;
+  margin: 0 auto;
+  padding: 2rem;
+
+  font-weight: normal;
+}
+
+a,
+.green {
+  text-decoration: none;
+  color: hsla(160, 100%, 37%, 1);
+  transition: 0.4s;
+}
