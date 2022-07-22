@@ -19,5 +19,16 @@ button {
   border-radius: 1px;
   border-style: solid;
   border-color: black;
+  cursor: pointer;
+}
+
+button:hover,
+button:focus {
+  background-color: var(--button-hover-color);
+}
+
+button:active {
+  box-shadow: 2px 4px 0px #7a7979;
+  transform: translateY(0);
 }
 </style>

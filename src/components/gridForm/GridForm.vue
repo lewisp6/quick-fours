@@ -1,174 +1,35 @@
 <script setup>
 import router from "@/router";
 import Button from "../button/Button.vue";
-import { categories } from "../../state/categories.js";
+import { combinedCategories } from "../../state/categories.js";
 import { validate } from "./validation";
 
 const onSubmit = function (e) {
-  const invalidFields = validate(categories);
+  // const invalidFields = validate(categories);
+  console.log(combinedCategories);
   router.push("/grid");
 };
+
+const labels = ["First", "Second", "Third", "Fourth", "Link"];
 </script>
 
 <template>
   <form @submit.prevent="onSubmit" className="create-form">
     <div className="categories">
-      <section className="category-one">
-        <h2>First Category</h2>
-        <label
-          >First word or phrase
-          <input
-            v-model="categories.categoryOne.first"
-            placeholder="Enter your word or phrase"
-          />
-        </label>
-        <label
-          >Second word or phrase
-          <input
-            v-model="categories.categoryOne.second"
-            placeholder="Enter your word or phrase"
-          />
-        </label>
-        <label
-          >Third word or phrase
-          <input
-            v-model="categories.categoryOne.third"
-            placeholder="Enter your word or phrase"
-          />
-        </label>
-        <label
-          >Fourth word or phrase
-          <input
-            v-model="categories.categoryOne.fourth"
-            placeholder="Enter your word or phrase"
-          />
-        </label>
-        <div className="link">
+      <section v-for="(category, index) in combinedCategories">
+        <h2>{{ labels[index] }} Category</h2>
+        <div v-for="(clue, index) in category">
           <label
-            >The connecting link
+            >{{ labels[index] }} word or phrase
             <input
-              v-model="categories.categoryOne.link"
-              placeholder="Enter the link"
+              v-if="clue.hasOwnProperty('clue')"
+              v-model="clue.clue"
+              placeholder="Enter your word or phrase"
             />
-          </label>
-        </div>
-      </section>
-      <section className="category-two">
-        <h2>Second Category</h2>
-        <label
-          >First word or phrase
-          <input
-            v-model="categories.categoryTwo.first"
-            placeholder="Enter your word or phrase"
-          />
-        </label>
-        <label
-          >Second word or phrase
-          <input
-            v-model="categories.categoryTwo.second"
-            placeholder="Enter your word or phrase"
-          />
-        </label>
-        <label
-          >Third word or phrase
-          <input
-            v-model="categories.categoryTwo.third"
-            placeholder="Enter your word or phrase"
-          />
-        </label>
-        <label
-          >Fourth word or phrase
-          <input
-            v-model="categories.categoryTwo.fourth"
-            placeholder="Enter your word or phrase"
-          />
-        </label>
-        <div className="link">
-          <label
-            >The connecting link
             <input
-              v-model="categories.categoryTwo.link"
-              placeholder="Enter the link"
-            />
-          </label>
-        </div>
-      </section>
-      <section className="category-three">
-        <h2>Third Category</h2>
-        <label
-          >First word or phrase
-          <input
-            v-model="categories.categoryThree.one"
-            placeholder="Enter your word or phrase"
-          />
-        </label>
-        <label
-          >Second word or phrase
-          <input
-            v-model="categories.categoryThree.two"
-            placeholder="Enter your word or phrase"
-          />
-        </label>
-        <label
-          >Third word or phrase
-          <input
-            v-model="categories.categoryThree.three"
-            placeholder="Enter your word or phrase"
-          />
-        </label>
-        <label
-          >Fourth word or phrase
-          <input
-            v-model="categories.categoryThree.four"
-            placeholder="Enter your word or phrase"
-          />
-        </label>
-        <div className="link">
-          <label
-            >The connecting link
-            <input
-              v-model="categories.categoryThree.link"
-              placeholder="Enter the link"
-            />
-          </label>
-        </div>
-      </section>
-      <section className="category-four">
-        <h2>Fourth Category</h2>
-        <label
-          >First word or phrase
-          <input
-            v-model="categories.categoryFour.one"
-            placeholder="Enter your word or phrase"
-          />
-        </label>
-        <label
-          >Second word or phrase
-          <input
-            v-model="categories.categoryFour.two"
-            placeholder="Enter your word or phrase"
-          />
-        </label>
-        <label
-          >Third word or phrase
-          <input
-            v-model="categories.categoryFour.three"
-            placeholder="Enter your word or phrase"
-          />
-        </label>
-        <label
-          >Fourth word or phrase
-          <input
-            v-model="categories.categoryFour.four"
-            placeholder="Enter your word or phrase"
-          />
-        </label>
-        <div className="link">
-          <label
-            >The connecting link
-            <input
-              v-model="categories.categoryFour.link"
-              placeholder="Enter the link"
+              v-if="clue.hasOwnProperty('link')"
+              v-model="clue.link"
+              placeholder="Enter your word or phrase"
             />
           </label>
         </div>

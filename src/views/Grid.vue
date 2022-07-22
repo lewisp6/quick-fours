@@ -1,5 +1,7 @@
 <script setup>
-import { categories } from "../state/categories.js";
+import Grid from "../components/grid/Grid.vue";
 </script>
 
-<template>Hello {{ categories.categoryOne.first }}</template>
+<template>
+  <Grid />
+</template>
