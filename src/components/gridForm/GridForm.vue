@@ -2,9 +2,8 @@
 import router from "@/router";
 import Button from "../button/Button.vue";
 import { combinedCategories } from "../../state/categories.js";
-import { validate } from "./validation";
 
-const onSubmit = function (e) {
+const onSubmit = function () {
   // const invalidFields = validate(categories);
   console.log(combinedCategories);
   router.push("/grid");

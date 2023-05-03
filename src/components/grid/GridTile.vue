@@ -1,12 +1,14 @@
 <script setup>
-const props = defineProps({
+defineProps({
   clue: String,
+  category: String,
+  onTileClick: Function,
 });
 </script>
 
 <template>
   <div className="tileContainer">
-    <button>{{ clue }}</button>
+    <button @click="onTileClick(clue, category)">{{ clue }}</button>
   </div>
 </template>
 
