@@ -9,14 +9,20 @@ describe("gameLogic", () => {
       expect(selectedList).toEqual([{ clue: "Test", category: "Test" }]);
     });
 
-    it("should add to the list if called twice", () => {
+    it("should add to the list if called twice with different clues", () => {
       const selectedList = [];
       selectTile("Test", "Test", selectedList);
-      selectTile("Test", "Test", selectedList);
+      selectTile("Test 2", "Test", selectedList);
       expect(selectedList).toEqual([
         { clue: "Test", category: "Test" },
-        { clue: "Test", category: "Test" },
+        { clue: "Test 2", category: "Test" },
       ]);
+    });
+
+    it("should remove a clue from the list if it is already in the list", () => {
+      const selectedList = [{ clue: "Test", category: "Test" }];
+      selectTile("Test", "Test", selectedList);
+      expect(selectedList).toEqual([]);
     });
   });
 

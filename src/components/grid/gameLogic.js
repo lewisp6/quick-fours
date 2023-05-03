@@ -1,6 +1,12 @@
-
 export function selectTile(clue, category, selectedList = []) {
-  selectedList.push({ clue, category });
+  if (
+    selectedList.some((item) => item.clue === clue && item.category == category)
+  ) {
+    selectedList.splice(selectedList.indexOf({ clue, category }), 1);
+  } else {
+    selectedList.push({ clue, category });
+  }
+
   return selectedList;
 }
 
