@@ -2,16 +2,9 @@
 import { reactive } from "vue";
 import Tile from "./GridTile.vue";
 import { combinedCategories } from "../../state/categories.js";
-import { hasMatch, selectTile } from "./gameLogic";
-import { shuffle } from "./shuffle";
+import { hasMatch, selectTile, getCategoriesForTiles } from "./gameLogic";
 
-const categoriesForTiles = combinedCategories
-  .map((category) => {
-    return category.filter((cluesWithLinks) => !("link" in cluesWithLinks));
-  })
-  .flat();
-
-shuffle(categoriesForTiles);
+const categoriesForTiles = getCategoriesForTiles(combinedCategories);
 
 let selectedTiles = [];
 let matchedCategories = reactive([]);
@@ -20,8 +13,7 @@ function onTileClick(clue, category) {
   selectTile(clue, category, selectedTiles);
 
   if (selectedTiles.length === 4) {
-    const result = hasMatch(selectedTiles, category);
-    if (result) {
+    if (hasMatch(selectedTiles, category)) {
       matchedCategories.push(category);
     }
     selectedTiles = [];
@@ -29,25 +21,29 @@ function onTileClick(clue, category) {
 }
 
 function getMatchedClass(category) {
-  return `matched-${matchedCategories.indexOf(category) + 1}`;
+  return `matched no-${matchedCategories.indexOf(category) + 1}`;
+}
+
+function hasCategoryBeenSovled(category) {
+  return matchedCategories.includes(category);
 }
 </script>
 
 <template>
   <div className="gridContainer">
-    <div
-      v-for="clues in categoriesForTiles"
-      :key="clues.clue"
-      :class="
-        matchedCategories.includes(clues.category)
-          ? getMatchedClass(clues.category)
-          : ''
-      "
-    >
+    <div className="grid unsovled">
       <Tile
+        v-for="clues in categoriesForTiles"
+        :key="clues.clue"
+        :class="
+          hasCategoryBeenSovled(clues.category)
+            ? getMatchedClass(clues.category)
+            : ''
+        "
         :onTileClick="onTileClick"
         :clue="clues.clue"
         :category="clues.category"
+        :solved="hasCategoryBeenSovled(clues.category) ? true : false"
       />
     </div>
   </div>
@@ -55,34 +51,41 @@ function getMatchedClass(category) {
 
 <style scoped>
 .gridContainer {
+  box-shadow: 16px 18px 0px #7a7979;
+  margin: 0 auto;
+  border-style: solid;
+  border-width: 4px;
+  border-color: rgb(249, 238, 246);
+  background-color: rgb(249, 238, 246);
+  padding: 2%;
+  width: fit-content;
+}
+.grid {
   display: grid;
+  grid-column-start: initial;
+  border-radius: 8px;
   grid-template-columns: repeat(4, 1fr);
+
   gap: 20px;
 }
 
-.matched-1 {
-  grid-row-start: 1;
-  transition: all ease-in-out 0.25s;
+.matched {
   animation: shake 0.5s;
-  background-color: red;
+}
+.no-1 {
+  grid-row-start: 1;
 }
 
-.matched-2 {
+.no-2 {
   grid-row-start: 2;
-  transition: 2s;
-  background-color: rgb(111, 45, 224);
 }
 
-.matched-3 {
+.no-3 {
   grid-row-start: 3;
-  transition: 2s;
-  background-color: rgb(224, 167, 227);
 }
 
-.matched-4 {
+.no-4 {
   grid-row-start: 4;
-  transition: 2s;
-  background-color: rgb(215, 229, 221);
 }
 
 @keyframes shake {

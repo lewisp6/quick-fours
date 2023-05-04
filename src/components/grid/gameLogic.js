@@ -1,3 +1,6 @@
+import { compose } from "ramda";
+import { shuffle } from "./shuffle";
+
 export function selectTile(clue, category, selectedList = []) {
   if (
     selectedList.some((item) => item.clue === clue && item.category == category)
@@ -13,3 +16,16 @@ export function selectTile(clue, category, selectedList = []) {
 export function hasMatch(selectedList, category) {
   return selectedList.every((item) => item.category === category);
 }
+
+function filterLinksFromCategories(categories) {
+  return categories
+    .map((category) => {
+      return category.filter((cluesWithLinks) => !("link" in cluesWithLinks));
+    })
+    .flat();
+}
+
+export const getCategoriesForTiles = compose(
+  shuffle,
+  filterLinksFromCategories
+);
