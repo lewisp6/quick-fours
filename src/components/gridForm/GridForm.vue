@@ -2,22 +2,31 @@
 import router from "@/router";
 import Button from "../button/Button.vue";
 import { combinedCategories } from "../../state/categories.js";
+import { validate } from "./validation.js";
+import { ref } from "vue";
 
-const onSubmit = function () {
-  // const invalidFields = validate(categories);
-  console.log(combinedCategories);
-  router.push("/grid");
+let error = ref(false);
+
+function onSubmit() {
+  if (validate(combinedCategories)) {
+    router.push("/grid");
+  } else {
+    error.value = true;
+  }
 };
 
 const labels = ["First", "Second", "Third", "Fourth", "Link"];
 </script>
 
 <template>
+  <p v-if="error" className="error">
+    Please make sure every clue and link is populated and unique.
+  </p>
   <form @submit.prevent="onSubmit" className="create-form">
     <div className="categories">
-      <section v-for="(category, index) in combinedCategories">
+      <section v-for="(category, index) in combinedCategories" :key="index">
         <h2>{{ labels[index] }} Category</h2>
-        <div v-for="(clue, index) in category">
+        <div v-for="(clue, index) in category" :key="index">
           <label
             >{{ labels[index] }} word or phrase
             <input
@@ -39,6 +48,15 @@ const labels = ["First", "Second", "Third", "Fourth", "Link"];
 </template>
 
 <style scoped>
+.error {
+  font-size: larger;
+  color: rgb(67, 3, 3);
+  padding: 20px;
+  background-color: rgb(255, 210, 210);
+  border-style: dotted;
+  border-width: 2px;
+}
+
 .categories {
   display: grid;
   grid-auto-columns: minmax(0, 1fr);

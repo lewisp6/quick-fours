@@ -13,6 +13,7 @@ function onTileClick(clue, category) {
   selectTile(clue, category, selectedTiles);
 
   if (selectedTiles.length === 4) {
+    console.log(hasMatch(selectedTiles, category));
     if (hasMatch(selectedTiles, category)) {
       matchedCategories.push(category);
     }
@@ -55,8 +56,8 @@ function hasCategoryBeenSovled(category) {
   margin: 0 auto;
   border-style: solid;
   border-width: 4px;
-  border-color: rgb(249, 238, 246);
-  background-color: rgb(249, 238, 246);
+  border-color: rgb(240, 123, 209);
+  background-color: var(--tertiary-color);
   padding: 2%;
   width: fit-content;
 }
