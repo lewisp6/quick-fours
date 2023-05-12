@@ -1,7 +1,8 @@
-<script>
-export default {
-  props: ["label"],
-};
+<script setup>
+defineProps({
+  label: String,
+});
+
 </script>
 
 <template>

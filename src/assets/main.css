@@ -7,7 +7,10 @@
   --tertiary-color: #ffe2fa;
   --button-hover-color: #ffd2a1;
   --grid-button-color: #c0faff;
-  --grid-button-hover: #c0faaa;
+  --grid-button-hover: #e6fdff;
+  --grid-button-solved: rgb(179, 249, 179);
+  --grid-button-highlight:  rgb(209, 209, 251);
+  --grid-border-color: rgb(240, 123, 209);
   /* #fff3e2 */
 
   /* desktop font sizes */
@@ -19,6 +22,41 @@
 
 body {
   background-color: var(--primary-color);
+}
+
+.dark {
+    /* colors */
+    --primary-color: #ffffff;
+    --secondary-color: #f9f9f9;
+    --tertiary-color: #fdf9f9;
+    --button-hover-color: #ffffff;
+    --grid-button-color: #959191;
+    --grid-button-hover: #ffffff;
+    --grid-button-color: #bbbbbb31;
+    --grid-button-hover: #ffffff1f;
+    --grid-button-solved: rgb(255, 255, 255);
+    --grid-button-highlight:  rgb(146, 142, 142);
+    --grid-border-color: black;
+    /* #fff3e2 */
+  
+    /* desktop font sizes */
+    --h1-desktop-font-size: 4em;
+  
+    /* mobile font sizes */
+    --h1-mobile-font-size: 3em;
+    background-color: var(--primary-color);
+}
+
+.container {
+  box-shadow: 16px 18px 0px #7a7979;
+  margin: 0 auto;
+  margin-bottom: 5%;
+  border-style: solid;
+  border-width: 4px;
+  border-color: var(--grid-border-color);
+  background-color: var(--tertiary-color);
+  padding: 2%;
+  max-width: fit-content;
 }
 
 #app {

@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue';
+import { computed } from "vue";
 
 const props = defineProps({
   clue: String,
@@ -54,18 +54,18 @@ button {
 }
 
 .solved {
-  background-color: rgb(179, 249, 179);
+  background-color: var(--grid-button-solved);
 }
 
 button:hover {
-  background-color: #e6fdff;
+  background-color: var(--grid-button-hover);
 }
 
 .highlight {
-  background-color: rgb(209, 209, 251);
+  background-color: var(--grid-button-highlight);
 }
 
 .highlight:hover {
-  background-color: rgb(209, 209, 251);
+  background-color: var(--grid-button-highlight);
 }
 </style>

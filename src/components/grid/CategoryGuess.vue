@@ -20,7 +20,7 @@ function submitGuess() {
   <div className="guessWrap">
     <label for="guess">{{ label }}</label>
     <input id="guess" className="guessInput" name="guess" v-model="guess" />
-    <button @click="submitGuess()">Go</button>
+    <button :class="guessButton" @click="submitGuess()">Guess</button>
     <p v-if="show">{{ correct ? "Correct!" : "Incorrect: " + link }}</p>
   </div>
 </template>
@@ -40,5 +40,21 @@ function submitGuess() {
   border-radius: 4px;
   display: inline-block;
   margin-bottom: 10px;
+  height: 40px;
+}
+
+button {
+  height: 40px;
+  font-size: 18px;
+  background-color: var(--secondary-color);
+  border-radius: 1px;
+  border-style: solid;
+  border-color: black;
+  cursor: pointer;
+}
+
+button:hover,
+button:focus {
+  background-color: var(--button-hover-color);
 }
 </style>
