@@ -1,5 +1,5 @@
 <script setup>
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 import Tile from "./GridTile.vue";
 import CategoryGuess from "./CategoryGuess.vue";
 import { combinedCategories } from "../../state/categories.js";
@@ -12,18 +12,22 @@ import {
 
 const categoriesForTiles = getCategoriesForTiles(combinedCategories);
 const links = getLinksForCategories(combinedCategories);
-let selectedTiles = [];
+const selectedTiles = ref([]);
+const failedTiles = ref([]);
 let matchedCategories = reactive([]);
 
 function onTileClick(clue, category) {
-  selectTile(clue, category, selectedTiles);
+  failedTiles.value = [];
+  selectTile(clue, category, selectedTiles.value);
 
-  if (selectedTiles.length === 4) {
-    if (hasMatch(selectedTiles, category)) {
+  if (selectedTiles.value.length === 4) {
+    if (hasMatch(selectedTiles.value, category)) {
       matchedCategories.push(category);
       // todo if 3 matched match the 4th
     }
-    selectedTiles = [];
+
+    failedTiles.value = selectedTiles.value.slice();
+    selectedTiles.value = [];
   }
 }
 
@@ -33,6 +37,14 @@ function getMatchedClass(category) {
 
 function hasCategoryBeenSovled(category) {
   return matchedCategories.includes(category);
+}
+
+function isSelectedTile(clue) {
+  return selectedTiles.value.some((tile) => tile.clue === clue);
+}
+
+function isFailedTile(clue) {
+  return failedTiles.value.some((tile) => tile.clue === clue);
 }
 </script>
 
@@ -47,10 +59,12 @@ function hasCategoryBeenSovled(category) {
             ? getMatchedClass(clues.category)
             : ''
         "
-        :onTileClick="onTileClick"
+        @tile-clicked="onTileClick"
         :clue="clues.clue"
         :category="clues.category"
         :solved="hasCategoryBeenSovled(clues.category) ? true : false"
+        :selected="isSelectedTile(clues.clue) ? true : false"
+        :failed="isFailedTile(clues.clue) ? true : false"
       />
     </div>
   </div>
@@ -114,41 +128,5 @@ function hasCategoryBeenSovled(category) {
 
 .categoryInput {
   width: 100%;
-}
-
-@keyframes shake {
-  0% {
-    transform: translate(1px, 1px) rotate(0deg);
-  }
-  10% {
-    transform: translate(-1px, -2px) rotate(-1deg);
-  }
-  20% {
-    transform: translate(-3px, 0px) rotate(1deg);
-  }
-  30% {
-    transform: translate(3px, 2px) rotate(0deg);
-  }
-  40% {
-    transform: translate(1px, -1px) rotate(1deg);
-  }
-  50% {
-    transform: translate(-1px, 2px) rotate(-1deg);
-  }
-  60% {
-    transform: translate(-3px, 1px) rotate(0deg);
-  }
-  70% {
-    transform: translate(3px, 1px) rotate(-1deg);
-  }
-  80% {
-    transform: translate(-1px, -1px) rotate(1deg);
-  }
-  90% {
-    transform: translate(1px, 2px) rotate(0deg);
-  }
-  100% {
-    transform: translate(1px, -2px) rotate(-1deg);
-  }
 }
 </style>

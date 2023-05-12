@@ -1,25 +1,35 @@
 <script setup>
-import { ref } from "vue";
+import { computed } from 'vue';
 
 const props = defineProps({
   clue: String,
   category: String,
   onTileClick: Function,
   solved: Boolean,
-  clear: Boolean,
+  selected: Boolean,
+  failed: Boolean,
 });
 
-let selected = ref(false);
+const tileClass = computed(() => {
+  if (props.failed && !props.solved) {
+    return "failed";
+  }
 
-function onClick() {
-  selected.value = !selected.value;
-  props.onTileClick(props.clue, props.category);
-}
+  if (props.solved) {
+    return "solved";
+  }
+
+  if (props.selected) {
+    return "highlight";
+  }
+
+  return "";
+});
 </script>
 
 <template>
   <div className="tileContainer">
-    <button @click="onClick()" :class="selected || solved ? 'highlight' : ''">
+    <button @click="$emit('tileClicked', clue, category)" :class="tileClass">
       {{ clue }}
     </button>
   </div>
@@ -38,8 +48,17 @@ button {
   cursor: pointer;
 }
 
+.failed {
+  background-color: var(--grid-button-color);
+  animation: shake 0.5s;
+}
+
+.solved {
+  background-color: rgb(179, 249, 179);
+}
+
 button:hover {
-  background-color: var(--grid-button-hover);
+  background-color: #e6fdff;
 }
 
 .highlight {
