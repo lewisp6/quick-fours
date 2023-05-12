@@ -55,18 +55,30 @@ function hasCategoryBeenSovled(category) {
     </div>
   </div>
   <div className="container" v-if="matchedCategories.length === 4">
-    <p>Well done :-) now guess the categories:</p>
-    <CategoryGuess
-      v-for="(matched, index) in matchedCategories"
-      :key="index"
-      :label="'Link ' + (index + 1)"
-      :link="links[matched]"
-    />
+    <p className="congrats">Well done :-) now guess the categories:</p>
+    <div className="guessWrap">
+      <CategoryGuess
+        v-for="(matched, index) in matchedCategories"
+        :key="index"
+        :label="'Link ' + (index + 1)"
+        :link="links[matched]"
+      />
+    </div>
   </div>
 </template>
 
 <style scoped>
-.gridContainer {}
+.guessWrap {
+  display: grid;
+}
+
+.guess {
+  padding-bottom: 20px;
+}
+
+.congrats {
+  font-weight: bold;
+}
 .grid {
   display: grid;
   grid-column-start: initial;
