@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { hasMatch, selectTile } from "../gameLogic";
+import { hasMatch, selectTile, getLinksForCategories } from "../gameLogic";
 
 describe("gameLogic", () => {
   describe("selectTile", () => {
@@ -47,6 +47,34 @@ describe("gameLogic", () => {
       ];
 
       expect(hasMatch(selectedList, "Test")).toBe(false);
+    });
+  });
+
+  describe("getLinksForCategories", () => {
+    it("should return the clues for each category", () => {
+      const categories = [
+        [
+          { clue: "clue1", category: "one" },
+          { clue: "clue2", category: "one" },
+          { clue: "clue3", category: "one" },
+          { clue: "clue4", category: "one" },
+          { link: "link", category: "one" },
+        ],
+        [
+          { clue: "sfsfsf", category: "two" },
+          { clue: "sfsfsfs", category: "two" },
+          { clue: "sfsfsfss", category: "two" },
+          { clue: "sfsfsfsss", category: "two" },
+          { link: "link2", category: "two" },
+        ],
+      ];
+
+      const expected = {
+        one: "link",
+        two: "link2",
+      };
+
+      expect(getLinksForCategories(categories)).toStrictEqual(expected);
     });
   });
 });

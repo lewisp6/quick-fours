@@ -1,11 +1,17 @@
 <script setup>
 import { reactive } from "vue";
 import Tile from "./GridTile.vue";
+import CategoryGuess from "./CategoryGuess.vue";
 import { combinedCategories } from "../../state/categories.js";
-import { hasMatch, selectTile, getCategoriesForTiles } from "./gameLogic";
+import {
+  hasMatch,
+  selectTile,
+  getCategoriesForTiles,
+  getLinksForCategories,
+} from "./gameLogic";
 
 const categoriesForTiles = getCategoriesForTiles(combinedCategories);
-
+const links = getLinksForCategories(combinedCategories);
 let selectedTiles = [];
 let matchedCategories = reactive([]);
 
@@ -13,9 +19,9 @@ function onTileClick(clue, category) {
   selectTile(clue, category, selectedTiles);
 
   if (selectedTiles.length === 4) {
-    console.log(hasMatch(selectedTiles, category));
     if (hasMatch(selectedTiles, category)) {
       matchedCategories.push(category);
+      // todo if 3 matched match the 4th
     }
     selectedTiles = [];
   }
@@ -31,7 +37,7 @@ function hasCategoryBeenSovled(category) {
 </script>
 
 <template>
-  <div className="gridContainer">
+  <div className="container">
     <div className="grid unsovled">
       <Tile
         v-for="clues in categoriesForTiles"
@@ -48,19 +54,19 @@ function hasCategoryBeenSovled(category) {
       />
     </div>
   </div>
+  <div className="container" v-if="matchedCategories.length === 4">
+    <p>Well done :-) now guess the categories:</p>
+    <CategoryGuess
+      v-for="(matched, index) in matchedCategories"
+      :key="index"
+      :label="'Link ' + (index + 1)"
+      :link="links[matched]"
+    />
+  </div>
 </template>
 
 <style scoped>
-.gridContainer {
-  box-shadow: 16px 18px 0px #7a7979;
-  margin: 0 auto;
-  border-style: solid;
-  border-width: 4px;
-  border-color: rgb(240, 123, 209);
-  background-color: var(--tertiary-color);
-  padding: 2%;
-  width: fit-content;
-}
+.gridContainer {}
 .grid {
   display: grid;
   grid-column-start: initial;
@@ -87,6 +93,15 @@ function hasCategoryBeenSovled(category) {
 
 .no-4 {
   grid-row-start: 4;
+}
+
+.categoryContainer {
+  margin: 0 auto;
+  width: fit-content;
+}
+
+.categoryInput {
+  width: 100%;
 }
 
 @keyframes shake {

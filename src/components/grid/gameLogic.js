@@ -29,3 +29,12 @@ export const getCategoriesForTiles = compose(
   shuffle,
   filterLinksFromCategories
 );
+
+export function getLinksForCategories(categories) {
+  return categories.flat().reduce((links, category) => {
+    if ("link" in category) {
+      links[category.category] = category.link;
+    }
+    return links;
+  }, {});
+}
