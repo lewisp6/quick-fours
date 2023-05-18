@@ -10,14 +10,14 @@ describe("CategoryGuess", () => {
   it("should have a label for an input and button", () => {
     render(CategoryGuess, { props: { label, link } });
     screen.getByText(label);
-    screen.getByText("Go");
+    screen.getByText("Guess");
   });
 
   it("should show correct if guess entered matches link", async () => {
     render(CategoryGuess, { props: { label, link } });
     const guessInput = screen.getByLabelText(label);
     await fireEvent.update(guessInput, link);
-    await fireEvent.click(screen.getByText("Go"));
+    await fireEvent.click(screen.getByText("Guess"));
     expect(screen.getByText("Correct!")).toBeVisible();
   });
 
@@ -25,7 +25,7 @@ describe("CategoryGuess", () => {
     render(CategoryGuess, { props: { label, link } });
     const guessInput = screen.getByLabelText(label);
     await fireEvent.update(guessInput, "transport");
-    await fireEvent.click(screen.getByText("Go"));
+    await fireEvent.click(screen.getByText("Guess"));
     expect(screen.getByText("Correct!")).toBeVisible();
   });
 
@@ -33,7 +33,7 @@ describe("CategoryGuess", () => {
     render(CategoryGuess, { props: { label, link } });
     const guessInput = screen.getByLabelText(label);
     await fireEvent.update(guessInput, "something random");
-    await fireEvent.click(screen.getByText("Go"));
+    await fireEvent.click(screen.getByText("Guess"));
     expect(screen.getByText("Incorrect: " + link)).toBeVisible();
   });
 });

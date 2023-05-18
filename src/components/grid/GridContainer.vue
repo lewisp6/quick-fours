@@ -19,8 +19,9 @@ let matchedCategories = reactive([]);
 function onTileClick(clue, category) {
   failedTiles.value = [];
   if (matchedCategories.includes(category)) return;
-  selectedTiles.value = selectTile(clue, category, selectedTiles.value);
 
+  selectedTiles.value = selectTile(clue, category, selectedTiles.value);
+  
   if (selectedTiles.value.length === 4) {
     if (hasMatch(selectedTiles.value, category)) {
       matchedCategories.push(category);

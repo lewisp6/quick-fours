@@ -2,7 +2,9 @@ import { compose } from "ramda";
 import { shuffle } from "./shuffle";
 
 export function selectTile(clue, category, selectedList = []) {
-  return selectedList.includes({ clue, category })
+  return selectedList.some(
+    (item) => item.clue === clue && item.category == category
+  )
     ? selectedList.filter((item) => item.clue !== clue)
     : selectedList.concat({ clue, category });
 }
