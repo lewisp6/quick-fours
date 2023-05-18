@@ -32,35 +32,35 @@ export const categories = reactive({
 });
 
 export const categoryOne = [
-  { clue: "a", category: "one" },
-  { clue: "aa", category: "one" },
-  { clue: "aaa", category: "one" },
-  { clue: "aaaa", category: "one" },
-  { link: "a", category: "one" },
+  { clue: "", category: "one" },
+  { clue: "", category: "one" },
+  { clue: "", category: "one" },
+  { clue: "", category: "one" },
+  { link: "", category: "one" },
 ];
 
 export const categoryTwo = [
-  { clue: "b", category: "two" },
-  { clue: "bb", category: "two" },
-  { clue: "bbb", category: "two" },
-  { clue: "bbbb", category: "two" },
-  { link: "b", category: "two" },
+  { clue: "", category: "two" },
+  { clue: "", category: "two" },
+  { clue: "", category: "two" },
+  { clue: "", category: "two" },
+  { link: "", category: "two" },
 ];
 
 export const categoryThree = [
-  { clue: "c", category: "three" },
-  { clue: "cc", category: "three" },
-  { clue: "ccc", category: "three" },
-  { clue: "cccc", category: "three" },
-  { link: "c", category: "three" },
+  { clue: "", category: "three" },
+  { clue: "", category: "three" },
+  { clue: "", category: "three" },
+  { clue: "", category: "three" },
+  { link: "", category: "three" },
 ];
 
 export const categoryFour = [
-  { clue: "d", category: "four" },
-  { clue: "dd", category: "four" },
-  { clue: "ddd", category: "four" },
-  { clue: "dddd", category: "four" },
-  { link: "d", category: "four" },
+  { clue: "", category: "four" },
+  { clue: "", category: "four" },
+  { clue: "", category: "four" },
+  { clue: "", category: "four" },
+  { link: "", category: "four" },
 ];
 
 export const combinedCategories = [
