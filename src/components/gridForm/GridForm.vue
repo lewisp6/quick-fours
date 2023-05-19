@@ -1,14 +1,14 @@
 <script setup>
 import router from "@/router";
 import Button from "../button/Button.vue";
-import { combinedCategories } from "../../state/categories.js";
+import { categoryStore } from "../../state/categories.js";
 import { validate } from "./validation.js";
 import { ref } from "vue";
 
 let error = ref(false);
 
 function onSubmit() {
-  if (validate(combinedCategories)) {
+  if (validate(categoryStore.categories)) {
     router.push("/grid");
   } else {
     error.value = true;
@@ -24,7 +24,10 @@ const labels = ["First", "Second", "Third", "Fourth", "Link"];
   </p>
   <form @submit.prevent="onSubmit" className="create-form">
     <div className="categories">
-      <section v-for="(category, index) in combinedCategories" :key="index">
+      <section
+        v-for="(category, index) in categoryStore.categories"
+        :key="index"
+      >
         <h2>{{ labels[index] }} Category</h2>
         <div v-for="(clue, index) in category" :key="index">
           <label

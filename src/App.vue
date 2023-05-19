@@ -4,10 +4,8 @@ import { RouterView } from "vue-router";
 function toggleTheme() {
   if (document.body.classList.contains("dark")) {
     document.body.classList.remove("dark");
-    console.log('f');
   } else {
     document.body.classList.add("dark");
-    console.log('fd');
   }
 }
 </script>
@@ -21,10 +19,7 @@ function toggleTheme() {
   />
   <label for="checkbox" class="switch-label">
     Less colour
-    <div
-      class="switch-toggle"
-      :class="{ 'switch-toggle-checked': userTheme === 'dark-theme' }"
-    ></div>
+    <div class="switch-toggle"></div>
   </label>
   <RouterView />
 </template>

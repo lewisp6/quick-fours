@@ -21,6 +21,7 @@ button {
   border-style: solid;
   border-color: black;
   cursor: pointer;
+  width: 100%;
 }
 
 button:hover,

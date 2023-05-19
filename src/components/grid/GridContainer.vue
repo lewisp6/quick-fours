@@ -2,7 +2,6 @@
 import { reactive, ref } from "vue";
 import Tile from "./GridTile.vue";
 import CategoryGuess from "./CategoryGuess.vue";
-import { combinedCategories } from "../../state/categories.js";
 import {
   hasMatch,
   selectTile,
@@ -10,8 +9,12 @@ import {
   getLinksForCategories,
 } from "./gameLogic";
 
-const categoriesForTiles = getCategoriesForTiles(combinedCategories);
-const links = getLinksForCategories(combinedCategories);
+const props = defineProps({
+  categories: Array,
+});
+
+const categoriesForTiles = getCategoriesForTiles(props.categories);
+const links = getLinksForCategories(props.categories);
 const selectedTiles = ref([]);
 const failedTiles = ref([]);
 let matchedCategories = reactive([]);

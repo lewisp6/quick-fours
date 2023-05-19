@@ -20,7 +20,7 @@ function submitGuess() {
   <div className="guessWrap">
     <label for="guess">{{ label }}</label>
     <input id="guess" className="guessInput" name="guess" v-model="guess" />
-    <button :class="guessButton" @click="submitGuess()">Guess</button>
+    <button className="guessButton" @click="submitGuess()">Guess</button>
     <p v-if="show">{{ correct ? "Correct!" : "Incorrect: " + link }}</p>
   </div>
 </template>
