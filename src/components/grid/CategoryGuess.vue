@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from "vue";
+import { scoreStore } from "../../state/score";
 
 const props = defineProps({
   label: String,
@@ -11,8 +12,12 @@ const show = ref(false);
 const correct = ref();
 
 function submitGuess() {
+  scoreStore.increaseGuess();
   show.value = !show.value;
-  correct.value = props.link.includes(guess.value);
+  correct.value = guess.value && props.link.includes(guess.value);
+  if (correct.value) {
+    scoreStore.increaseScore();
+  }
 }
 </script>
 
@@ -20,7 +25,9 @@ function submitGuess() {
   <div className="guessWrap">
     <label for="guess">{{ label }}</label>
     <input id="guess" className="guessInput" name="guess" v-model="guess" />
-    <button className="guessButton" @click="submitGuess()">Guess</button>
+    <button className="guessButton" @click="submitGuess()" :disabled="show">
+      Guess
+    </button>
     <p v-if="show">{{ correct ? "Correct!" : "Incorrect: " + link }}</p>
   </div>
 </template>

@@ -36,4 +36,10 @@ describe("CategoryGuess", () => {
     await fireEvent.click(screen.getByText("Guess"));
     expect(screen.getByText("Incorrect: " + link)).toBeVisible();
   });
+
+  it("should show incorrect and correct link if the guess is left blank", async () => {
+    render(CategoryGuess, { props: { label, link } });
+    await fireEvent.click(screen.getByText("Guess"));
+    expect(screen.getByText("Incorrect: " + link)).toBeVisible();
+  });
 });

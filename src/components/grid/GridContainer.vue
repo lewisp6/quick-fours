@@ -7,7 +7,7 @@ import {
   selectTile,
   getCategoriesForTiles,
   getLinksForCategories,
-} from "./gameLogic";
+} from "./logic/gameLogic";
 
 const props = defineProps({
   categories: Array,

@@ -1,5 +1,9 @@
 import { describe, it, expect } from "vitest";
-import { hasMatch, selectTile, getLinksForCategories } from "../gameLogic";
+import {
+  hasMatch,
+  selectTile,
+  getLinksForCategories,
+} from "../../logic/gameLogic";
 
 describe("gameLogic", () => {
   describe("selectTile", () => {
