@@ -63,20 +63,35 @@ const labels = ["First", "Second", "Third", "Fourth", "Link"];
 .categories {
   display: grid;
   grid-auto-columns: minmax(0, 1fr);
-  grid-auto-flow: column;
-  gap: 40px;
-  margin-top: 20px;
+  @media screen and (min-width: 768px) {
+    grid-auto-flow: column;
+    gap: 40px;
+    margin-top: 20px;
+  }
+
+  gap: 20px;
+  margin-top: 10px;
 }
 
 .create-form h2 {
+  @media screen and (min-width: 768px) {
+
   margin: 0 0 20px;
+  }
 }
 
 .create-form input {
   width: 100%;
-  height: 50px;
-  margin-bottom: 30px;
-  font-size: 18px;
+  @media screen and (min-width: 768px) {
+    height: 50px;
+    margin-bottom: 30px;
+    font-size: 18px;
+  }
+
+    height: 35px;
+    margin-bottom: 10px;
+    font-size: 15px;
+  
 }
 
 section {
@@ -93,8 +108,12 @@ section {
 }
 
 .submit-button {
-  width: 400px;
-  margin: 40px auto;
+  @media screen and (min-width: 768px) {
+    width: 400px;
+    margin: 40px auto;
+  }
+  height: auto;
+  margin: 20px auto;
   display: block;
 }
 </style>

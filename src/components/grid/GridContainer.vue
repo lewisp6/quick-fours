@@ -114,10 +114,13 @@ function extractClues(matchedCategory) {
 .grid {
   display: grid;
   grid-column-start: initial;
-  border-radius: 8px;
   grid-template-columns: repeat(4, 1fr);
 
-  gap: 20px;
+  @media screen and (min-width: 990px) {
+    gap: 20px;
+  }
+  gap: 7px;
+  border-radius: 8px;
 }
 
 .matched {

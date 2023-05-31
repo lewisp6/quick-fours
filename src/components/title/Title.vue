@@ -12,6 +12,10 @@ export default {
 
 <style scoped>
 h1 {
+  @media screen and (min-width: 990px) {
+    font-size: var(--h1-desktop-font-size);
+  }
+
   font-size: var(--h1-mobile-font-size);
 }
 </style>

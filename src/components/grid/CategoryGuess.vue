@@ -52,7 +52,10 @@ function submitGuess() {
 
 button {
   height: 35px;
-  font-size: 18px;
+  @media screen and (min-width: 768px) {
+    font-size: 1.2em;
+  }
+  font-size: 12px;
   background-color: var(--secondary-color);
   border-radius: 1px;
   border-style: solid;

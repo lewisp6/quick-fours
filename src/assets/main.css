@@ -13,11 +13,11 @@
   --grid-border-color: rgb(240, 123, 209);
   /* #fff3e2 */
 
-  /* desktop font sizes */
-  --h1-desktop-font-size: 4em;
-
-  /* mobile font sizes */
-  --h1-mobile-font-size: 3em;
+    /* desktop font sizes */
+    --h1-desktop-font-size: 4.5em;
+  
+    /* mobile font sizes */
+    --h1-mobile-font-size: 3em;
 }
 
 body {
@@ -40,7 +40,7 @@ body {
     /* #fff3e2 */
   
     /* desktop font sizes */
-    --h1-desktop-font-size: 4em;
+    --h1-desktop-font-size: 4.5em;
   
     /* mobile font sizes */
     --h1-mobile-font-size: 3em;
@@ -48,7 +48,14 @@ body {
 }
 
 .container {
-  box-shadow: 16px 18px 0px #7a7979;
+  font-size: 12px;
+
+  @media screen and (min-width: 990px) {
+    box-shadow: 16px 18px 0px #7a7979;
+    font-size: 1.2em;
+  }
+
+  box-shadow: 6px 8px 0px #7a7979;
   margin: 0 auto;
   margin-bottom: 5%;
   border-style: solid;

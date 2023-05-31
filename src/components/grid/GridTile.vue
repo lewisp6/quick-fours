@@ -37,9 +37,15 @@ const tileClass = computed(() => {
 
 <style scoped>
 button {
-  font-size: 1.4em;
-  width: 200px;
-  min-height: 100px;
+  font-size: 12px;
+  @media screen and (min-width: 990px) {
+    font-size: 1.2em;
+    min-width: 200px;
+    min-height: 100px;
+  }
+  min-height: 50px;
+  width: 100%;
+  height: 100%;
   background-color: var(--grid-button-color);
   border-radius: 1px;
   border-style: solid;

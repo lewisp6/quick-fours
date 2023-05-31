@@ -37,7 +37,9 @@ section {
 }
 
 .buttonWrap {
-  width: 40%;
+  @media only screen and (min-width: 768px) {
+    width: 40%;
+  }
   justify-content: space-between;
 }
 
