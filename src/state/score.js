@@ -1,7 +1,7 @@
 import { reactive } from "vue";
 
 export const scoreStore = reactive({
-  score: 4,
+  score: 0,
   guess: 0,
   increaseScore() {
     this.score++;

@@ -1,6 +1,7 @@
 <script setup>
 import { reactive, ref } from "vue";
 import Tile from "./GridTile.vue";
+import FireworkLauncher from "../firework/FireworkLauncher.vue";
 import CategoryGuess from "./CategoryGuess.vue";
 import {
   hasMatch,
@@ -8,6 +9,7 @@ import {
   getCategoriesForTiles,
   getLinksForCategories,
 } from "./logic/gameLogic";
+import { scoreStore } from "../../state/score";
 
 const props = defineProps({
   categories: Array,
@@ -24,7 +26,7 @@ function onTileClick(clue, category) {
   if (matchedCategories.includes(category)) return;
 
   selectedTiles.value = selectTile(clue, category, selectedTiles.value);
-  
+
   if (selectedTiles.value.length === 4) {
     if (hasMatch(selectedTiles.value, category)) {
       matchedCategories.push(category);
@@ -50,6 +52,17 @@ function isSelectedTile(clue) {
 
 function isFailedTile(clue) {
   return failedTiles.value.some((tile) => tile.clue === clue);
+}
+
+function extractClues(matchedCategory) {
+  const clues = categoriesForTiles
+    .map((category) => {
+      if (category.category === matchedCategory) {
+        return category.clue;
+      }
+    })
+    .filter((clue) => clue);
+  return clues.join(", ");
 }
 </script>
 
@@ -79,7 +92,7 @@ function isFailedTile(clue) {
       <CategoryGuess
         v-for="(matched, index) in matchedCategories"
         :key="index"
-        :label="'Link ' + (index + 1)"
+        :label="extractClues(matched)"
         :link="links[matched]"
       />
     </div>

@@ -14,7 +14,7 @@ const correct = ref();
 function submitGuess() {
   scoreStore.increaseGuess();
   show.value = !show.value;
-  correct.value = guess.value && props.link.includes(guess.value);
+  correct.value = guess.value && props.link.toLowerCase().includes(guess.value.toLowerCase());
   if (correct.value) {
     scoreStore.increaseScore();
   }
@@ -28,7 +28,7 @@ function submitGuess() {
     <button className="guessButton" @click="submitGuess()" :disabled="show">
       Guess
     </button>
-    <p v-if="show">{{ correct ? "Correct!" : "Incorrect: " + link }}</p>
+    <p v-if="show">{{ correct ? "Correct! " + link : "Incorrect: " + link }}</p>
   </div>
 </template>
 
@@ -47,11 +47,11 @@ function submitGuess() {
   border-radius: 4px;
   display: inline-block;
   margin-bottom: 10px;
-  height: 40px;
+  height: 35px;
 }
 
 button {
-  height: 40px;
+  height: 35px;
   font-size: 18px;
   background-color: var(--secondary-color);
   border-radius: 1px;

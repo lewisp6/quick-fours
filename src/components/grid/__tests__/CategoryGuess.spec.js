@@ -18,7 +18,7 @@ describe("CategoryGuess", () => {
     const guessInput = screen.getByLabelText(label);
     await fireEvent.update(guessInput, link);
     await fireEvent.click(screen.getByText("Guess"));
-    expect(screen.getByText("Correct!")).toBeVisible();
+    expect(screen.getByText("Correct! " + link)).toBeVisible();
   });
 
   it("should show correct if guess closesly matches link", async () => {
@@ -26,7 +26,7 @@ describe("CategoryGuess", () => {
     const guessInput = screen.getByLabelText(label);
     await fireEvent.update(guessInput, "transport");
     await fireEvent.click(screen.getByText("Guess"));
-    expect(screen.getByText("Correct!")).toBeVisible();
+    expect(screen.getByText("Correct! " + link)).toBeVisible();
   });
 
   it("should show incorrect and the correct link when guess does not match", async () => {
