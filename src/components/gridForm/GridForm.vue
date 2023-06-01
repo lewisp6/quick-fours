@@ -5,6 +5,7 @@ import { categoryStore } from "../../state/categories.js";
 import { validate } from "./validation.js";
 import { ref } from "vue";
 
+categoryStore.clearGrid();
 let error = ref(false);
 
 function onSubmit() {

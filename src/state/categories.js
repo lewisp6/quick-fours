@@ -74,4 +74,7 @@ export const categoryStore = reactive({
       exampleCategoryFour,
     ];
   },
+  clearGrid() {
+    this.categories = [categoryOne, categoryTwo, categoryThree, categoryFour];
+  }
 });
