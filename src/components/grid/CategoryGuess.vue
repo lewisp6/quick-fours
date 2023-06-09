@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { scoreStore } from "../../state/score";
 import { compareStrings } from "./logic/compareStrings";
 
@@ -9,28 +9,40 @@ const props = defineProps({
 });
 
 const guess = ref("");
-const show = ref(false);
-const correct = ref();
+const correct = ref(undefined);
 
 function submitGuess() {
   scoreStore.increaseGuess();
-  show.value = !show.value;
   correct.value = compareStrings(guess.value, props.link);
 
   if (correct.value) {
     scoreStore.increaseScore();
   }
 }
+
+const showAnswer = computed(() => {
+  return correct.value !== undefined;
+});
+
+const answer = computed(() => {
+  return correct.value ? "Correct! " + props.link : "Incorrect: " + props.link;
+});
 </script>
 
 <template>
   <div className="guessWrap">
     <label for="guess">{{ label }}</label>
     <input id="guess" className="guessInput" name="guess" v-model="guess" />
-    <button className="guessButton" @click="submitGuess()" :disabled="show">
+    <button
+      className="guessButton"
+      @click="submitGuess()"
+      :disabled="showAnswer"
+    >
       Guess
     </button>
-    <p v-if="show">{{ correct ? "Correct! " + link : "Incorrect: " + link }}</p>
+    <p v-if="showAnswer">
+      {{ answer }}
+    </p>
   </div>
 </template>
 
