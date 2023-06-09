@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import { scoreStore } from "../../state/score";
+import { compareStrings } from "./logic/compareStrings";
 
 const props = defineProps({
   label: String,
@@ -14,7 +15,8 @@ const correct = ref();
 function submitGuess() {
   scoreStore.increaseGuess();
   show.value = !show.value;
-  correct.value = guess.value && props.link.toLowerCase().includes(guess.value.toLowerCase());
+  correct.value = compareStrings(guess.value, props.link);
+
   if (correct.value) {
     scoreStore.increaseScore();
   }

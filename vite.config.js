@@ -13,7 +13,7 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: "",
+    outDir: "/Users/lewispearson/Projects/personal/lewisvuitton/games/quickfours",
   },
   test: {
     globals: true,

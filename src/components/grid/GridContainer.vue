@@ -1,7 +1,6 @@
 <script setup>
 import { reactive, ref } from "vue";
 import Tile from "./GridTile.vue";
-import FireworkLauncher from "../firework/FireworkLauncher.vue";
 import CategoryGuess from "./CategoryGuess.vue";
 import {
   hasMatch,
@@ -9,7 +8,6 @@ import {
   getCategoriesForTiles,
   getLinksForCategories,
 } from "./logic/gameLogic";
-import { scoreStore } from "../../state/score";
 
 const props = defineProps({
   categories: Array,
