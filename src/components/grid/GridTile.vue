@@ -38,12 +38,7 @@ const tileClass = computed(() => {
 <style scoped>
 button {
   font-size: 12px;
-  @media screen and (min-width: 990px) {
-    font-size: 1.2em;
-    min-width: 200px;
-    min-height: 100px;
-  }
-  min-height: 35px;
+  min-height: 30px;
   width: 100%;
   height: 100%;
   background-color: var(--grid-button-color);
@@ -52,6 +47,11 @@ button {
   border-color: black;
   border-radius: 5px;
   cursor: pointer;
+  @media screen and (min-width: 990px) {
+    font-size: 1.2em;
+    min-width: 200px;
+    min-height: 100px;
+  }
 }
 
 .failed {
